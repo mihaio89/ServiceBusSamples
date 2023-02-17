@@ -21,3 +21,26 @@ If you want the method to block and wait for the service to complete before cont
 On the other hand, if you want to start the service and continue with other tasks or operations in your application, you should use await host.RunAsync(). This method returns a Task object that represents the running service, so you can await it and continue with other operations while the service is running.
 
 In general, using await host.RunAsync() is recommended for most scenarios, as it allows you to continue with other operations while the service is running. However, if you're building a console application or a similar application that needs to keep running until the service is finished, you should use await host.Run().
+
+## pipeline
+This is a YAML pipeline script for Azure DevOps that builds a Docker image and pushes it to an Azure Container Registry. Here's a breakdown of the different parts of the script:
+
+trigger specifies that the pipeline won't be triggered by any code changes in the repository, as it is using "none" as the trigger.
+
+resources specifies that the pipeline is using the repository itself as a resource.
+
+variables defines several variables that are used throughout the pipeline, including the Docker registry service connection, the image repository name, the container registry name, the path to the Dockerfile, and a unique tag for the image that is based on the current build ID. The vmImageName variable specifies the name of the virtual machine image that the pipeline will run on.
+
+stages specifies that there are two stages in the pipeline: Build_Name and Release.
+
+jobs specifies that there are two jobs in the Build_Name stage: Build.
+
+pool specifies that the job should run on a virtual machine with the image specified in vmImageName.
+
+steps specifies the steps that the job will take, which in this case is a single Docker@2 task. This task will build a Docker image using the Dockerfile specified in dockerfilePath and push it to the Azure Container Registry specified in containerRegistry.
+
+tags specifies that the Docker image should be tagged with the value of tag, which is the build ID.
+
+Release stage: contains a single job called Release.
+
+steps specifies that the AzureCLI@2 task will be used to run Azure CLI commands inline with the script. Specifically, it installs the Container Apps CLI extension automatically by setting the extension.use_dynamic_install configuration variable to "yes_without_prompt". This allows the subsequent tasks to run container commands using the extension without having to install it manually.
