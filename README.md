@@ -31,6 +31,10 @@ ServiceBusReceiver is a lower-level API for receiving messages. It provides more
 
 In general, if you're building a long-running application or service that needs to continuously receive and process messages from a Service Bus queue or subscription, ServiceBusProcessor is the recommended API to use. If you need more control over the message processing flow or are building a short-lived application, ServiceBusReceiver may be a better fit.
 
+https://ciaranodonnell.dev/posts/receiving-from-azure-servicebus/
+https://devblogs.microsoft.com/azure-sdk/november-2020-servicebus-ga/
+
+
 ## pipeline
 This is a YAML pipeline script for Azure DevOps that builds a Docker image and pushes it to an Azure Container Registry. Here's a breakdown of the different parts of the script:
 
