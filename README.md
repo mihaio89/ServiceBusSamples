@@ -22,6 +22,15 @@ On the other hand, if you want to start the service and continue with other task
 
 In general, using await host.RunAsync() is recommended for most scenarios, as it allows you to continue with other operations while the service is running. However, if you're building a console application or a similar application that needs to keep running until the service is finished, you should use await host.Run().
 
+## ServiceBusProcessor and ServiceBusReceiver 
+They are two different ways to receive messages from a Service Bus queue or topic subscription in the Azure Service Bus SDK for .NET. Here are some differences between them:
+
+ServiceBusProcessor is a higher-level abstraction for processing messages. It manages the connection to the Service Bus and automatically handles message receipt, processing, and completion, as well as error handling and retry policies. It is designed to be used in long-running applications, such as web apps or services, that need to continuously receive and process messages from a queue or subscription.
+
+ServiceBusReceiver is a lower-level API for receiving messages. It provides more fine-grained control over the message receipt and processing flow. For example, you can manually complete, abandon, or defer messages, and you can control how many messages are received in a batch. It is designed to be used in short-running applications or for specific use cases where you need more control over the message processing.
+
+In general, if you're building a long-running application or service that needs to continuously receive and process messages from a Service Bus queue or subscription, ServiceBusProcessor is the recommended API to use. If you need more control over the message processing flow or are building a short-lived application, ServiceBusReceiver may be a better fit.
+
 ## pipeline
 This is a YAML pipeline script for Azure DevOps that builds a Docker image and pushes it to an Azure Container Registry. Here's a breakdown of the different parts of the script:
 
